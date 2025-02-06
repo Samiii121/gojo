@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gojo Satoru Background</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full viewport height */
+            background: url('https://wallpapers.com/downloads/high/gojo-satoru-in-an-aquarium-eal01vqjem07qdhz.webp') no-repeat center center/cover; /* Set background image */
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: column; /* Lägg klockan och datumet vertikalt */
+            overflow: hidden;
+        }
+
+        h1, p {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: slideIn 2s ease-out; /* Text animation */
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        #clock {
+            font-size: 6rem; /* Större klocka */
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            color: white; /* Ändrad färg till vit */
+            animation: fadeIn 1s ease-out;
+        }
+
+        #date {
+            font-size: 2rem; /* Datumets storlek */
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #graduation-timer {
+            font-size: 2.5rem;
+            margin-top: 50px; /* Ökat utrymme för att förhindra överlappning */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            color: #FFD700; /* Färgen på timern */
+        }
+
+        #soon {
+            font-size: 1.5rem; /* Mindre text för sommarlov*/
+            margin-top: 20px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #dua {
+            position: absolute;
+            bottom: 20px; /* Justerat textens position för att flytta ner den */
+            left: -5px; /* Flyttad ännu mer åt vänster */
+            background-color: rgba(0, 0, 0, 0.85); /* Mörkare bakgrund för dua */
+            padding: 15px;
+            width: 250px; /* Mindre bakgrund */
+            height: 250px; /* Mindre bakgrund */
+            border-radius: 10px;
+            font-size: 2rem; /* Lite mindre text */
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.9); /* Skugga för att få texten att synas bättre */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #00FF00;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #008000;
+        }
+
+        /* Styling för de andra knapparna */
+        #nextButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: lightblue;
+            color: white;
+            font-size: 1rem; /* Mindre text */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            display: none; /* Döljer knappen tills "Click Me" trycks */
+            cursor: pointer;
+            background: none; /* Ingen bakgrund */
+            text-align: center;
+        }
+
+        #finalButton {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: darkblue;
+            color: white;
+            font-size: 1.5rem;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            display: none; /* Döljer knappen tills nästa knapp trycks */
+            cursor: pointer;
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-100%); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes rotateClock {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .rotating-clock {
+            animation: rotateClock 60s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <h1>Believe in yourself, take on your challenges, dig deep within yourself to conquer fears.</h1>
+    <p>Every day is a new opportunity to be your best version.</p>
+    <div id="clock" class="rotating-clock"></div> <!-- Klocka element -->
+    <div id="date"></div> <!-- Datum element -->
+    <div id="soon">Det är snart sommarlov🫡</div> <!-- Sommarlov text -->
+    <div id="graduation-timer"></div> <!-- Gymnasieavslutningstimer -->
+    <div id="dua">اللهم اجعلنا من أهل الجنة، واغفر لنا ولأبائنا وأمهاتنا ولمن نحب.</div> <!-- Dua (bön) element -->
+    <button onclick="showMessage()">Click Me!</button> <!-- Knapp -->
+    
+    <!-- Dolda knappar för skämtet -->
+    <button id="nextButton" onclick="showNextMessage()">Tryck här</button>
+    <button id="finalButton">Du har officiellt slösat 30 sekunder av ditt liv HAHA gå läs dua till vänster</button>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            // Justera för 12-timmarsformat
+            if (hours === 0) {
+                hours = 12; // Visa 12 istället för 00 vid midnatt
+            } else if (hours > 12) {
+                hours -= 12; // Visa 12-timmarsformat (eftermiddag)
+            }
+
+            // Ta bort ledande nollor på timmar, minuter och sekunder
+            minutes = minutes > 9 ? minutes : minutes;
+            seconds = seconds > 9 ? seconds : seconds;
+
+            const date = now.toLocaleDateString(); // Får dagens datum i lokal formatering
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('date').textContent = date;
+        }
+
+        setInterval(updateClock, 1000); // Uppdatera klockan varje sekund
+        updateClock(); // Visa klockan direkt vid laddning
+
+        // Gymnasieavslutningstimer
+        function updateGraduationTimer() {
+            const targetDate = new Date("2025-06-07T12:00:00"); // Gymnasieavslutning (7 juni 2025 kl. 12:00)
+            const now = new Date();
+            const timeRemaining = targetDate - now;
+
+            if (timeRemaining <= 0) {
+                document.getElementById('graduation-timer').textContent = "Graduation Day!";
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                document.getElementById('graduation-timer').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        setInterval(updateGraduationTimer, 1000); // Uppdatera nedräkningen varje sekund
+
+        // Funktion för att visa ett meddelande när knappen trycks
+        function showMessage() {
+            alert("Kolla längst upp till vänster");
+            document.getElementById('nextButton').style.display = 'block'; // Visa nästa knapp
+            document.querySelector('button').textContent = "Kolla längst upp till vänster"; // Ändra knappens text
+        }
+
+        // Funktion för att visa nästa meddelande
+        function showNextMessage() {
+            document.getElementById('nextButton').textContent = "Kolla längst ner till höger"; // Textändring
+            document.getElementById('finalButton').style.display = 'block'; // Visa den sista knappen
+        }
+    </script>
+</body>
+</html>
